@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      global cors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: LoginService
+          uri: http://localhost:9191
+          predicates:
+            - Path=/api/login/**
+        - id: RegisterService
+          uri: http://localhost:8088
+          predicates:
+            - Path=/api/register/**
